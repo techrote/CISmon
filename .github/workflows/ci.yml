@@ -28,3 +28,12 @@ jobs:
         run: pip install platformio
       - name: Build ESP32 CYD firmware
         run: pio run -e esp32-cyd
+      - name: Upload flash binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: cismon-esp32-cyd
+          if-no-files-found: error
+          path: |
+            .pio/build/esp32-cyd/bootloader.bin
+            .pio/build/esp32-cyd/partitions.bin
+            .pio/build/esp32-cyd/firmware.bin
